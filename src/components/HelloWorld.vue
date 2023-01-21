@@ -29,14 +29,50 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <div>
+      {{'---------------------测试内容区---------------------------'}}
+    </div>
+    <div>
+      <el-button type="primary" @click="getTableInfo">某按钮</el-button>
+      <el-table :data="tableData">
+        <el-table-column prop="username" wdith="120"/>
+        <el-table-column prop="usernickname" wdith="120"/>
+        <el-table-column prop="password" wdith="120"/>
+        <el-table-column prop="realname" wdith="120"/>
+      </el-table>
+    </div>
+    <div>
+      {{'---------------------测试内容区---------------------------'}}
+    </div>
+    <div>
+      {{'---------------------测试内容区---------------------------'}}
+    </div>
   </div>
 </template>
 
 <script>
+
+import { getAll, getAll2 } from '@/network/api/modules/log/logapi'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      tableData: []
+    }
+  },
+  methods: {
+    getTableInfo () {
+      getAll().then((res) => {
+        console.log('res', res)
+        this.tableData = res.data
+      })
+    }
+  },
+  created () {
+
   }
 }
 </script>
