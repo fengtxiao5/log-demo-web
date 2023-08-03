@@ -48,14 +48,51 @@
       {{'---------------------测试内容区---------------------------'}}
     </div>
     <div>
-      {{'---------------------测试更新hook123---------------------------'}}
+      <el-table
+        :data="tableData2"
+        border
+        style="width: 100%">
+        <el-table-column
+          fixed
+          prop="title"
+          label="事项名称"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="describe"
+          label="事项详情"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="type"
+          label="类别"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="priority"
+          label="优先级"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+            <el-button type="text" size="small">编辑</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <div>
+      {{'---------------------测试更新hook1233---------------------------'}}
     </div>
   </div>
 </template>
 
 <script>
 
-import { getAll, getAll2 } from '@/network/api/modules/log/logapi'
+import { getAll, getAll2, getTodoList } from '@/network/api/modules/log/logapi'
 export default {
   name: 'HelloWorld',
   props: {
@@ -63,7 +100,8 @@ export default {
   },
   data () {
     return {
-      tableData: []
+      tableData: [],
+      tableData2: []
     }
   },
   methods: {
@@ -72,10 +110,19 @@ export default {
         console.log('res', res)
         this.tableData = res.data
       })
+    },
+    handleClick (row) {
+      console.log(row)
+    },
+    getTodoList () {
+      getTodoList().then((res) => {
+        console.log('res', res)
+        this.tableData2 = res.data
+      })
     }
   },
   created () {
-
+    this.getTodoList()
   }
 }
 </script>

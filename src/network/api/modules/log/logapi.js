@@ -7,3 +7,7 @@ export function getAll (data) {
 export function getAll2 (data) {
   return window.request.post(prefix + '/test/log/onetest', data)
 }
+
+export function getTodoList (data) {
+  return window.request.post(prefix + '/test/todo/getTodoList', data)
+}
