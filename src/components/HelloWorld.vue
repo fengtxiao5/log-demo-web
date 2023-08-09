@@ -118,7 +118,7 @@ export default {
     getTodoList () {
       getTodoList().then((res) => {
         console.log('res', res)
-        this.tableData2 = res.data
+        this.tableData2 = res
       })
     }
   },
