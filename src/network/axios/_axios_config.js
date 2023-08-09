@@ -3,19 +3,19 @@ export default {
   title: '',
   method: 'get',
   transformResponse: [
-    function (data) {
+    function(data) {
       return data
-    }
+    },
   ],
   // 请求头信息
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   params: {},
   paramsSerializer: {
-    function (params) {
+    function(params) {
       return Qs.stringify(params)
-    }
+    },
   },
   data: {},
   // 设置超时时间
@@ -24,9 +24,9 @@ export default {
   // 返回数据类型
   responseType: 'json',
   maxContentLength: 2000,
-  validateStatus: function (status) {
+  validateStatus: function(status) {
     return status >= 200 && status < 300
   },
   // 如果设置为0，将不会 follow 任何重定向
-  maxRedirects: 5
+  maxRedirects: 5,
 }

@@ -1,15 +1,22 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
-  extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
-  ],
   parserOptions: {
-    parser: '@babel/eslint-parser'
+    parser: '@babel/eslint-parser',
+    sourceType: 'module',
+    allowImportExportEverywhere: true,
   },
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  /**
+   * extends 配置数组时后面配置项覆盖前面配置的。
+   */
+  extends: ['eslint:recommended', 'plugin:vue/essential', 'plugin:prettier/recommended'],
+  // required to lint *.vue files
+  // plugins: ['vue', 'prettier'],
+  // add your custom rules here
   rules: {
     // allow async-await
     'no-console': 'off',
@@ -24,6 +31,6 @@ module.exports = {
     'no-sparse-arrays': 'off',
     'vue/no-mutating-props': 'off',
     'vue/no-dupe-keys': 'off',
-    'vue/no-use-v-if-with-v-for': 'off'
-  }
+    'vue/no-use-v-if-with-v-for': 'off',
+  },
 }

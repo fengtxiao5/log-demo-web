@@ -1,19 +1,25 @@
 {
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
     "baseUrl": "./",
-    "moduleResolution": "node",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+      "@src/*": ["src/*"],
+      "@view/*": ["src/view/*"],
+      "@components": ["src/components/*"],
+      "@hooks": ["src/hooks/*"],
+      "@analysis/*": ["src/view/analysis/*"],
+      "@system/*": ["src/view/system/*"],
+      "@design/*": ["src/view/design/*"],
+      "@resource/*": ["src/view/resource/*"],
+      "@quality/*": ["src/view/quality/*"],
+      "@trace/*": ["src/view/trace/*"],
+      "@ops/*": ["src/view/ops/*"],
+      "@envir/*": ["src/view/envir/*"],
+      "@execute/*": ["src/view/execute/*"],
+      "@bug/*": ["src/view/bug/*"],
+      "@reliability/*": ["src/view/reliability/*"],
+      "@security/*": ["src/view/security/*"],
+      "@template/*": ["src/view/template/*"]
+    }
   }
 }

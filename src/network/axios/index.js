@@ -11,13 +11,11 @@ $http.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-$http.interceptors.response.use(
-  (response) => {
-    console.log('response拦截了', response)
-    // if (response.data) {
-    //   response.data = JSON.parse(response.data)
-    // }
-    return response
-  }
-)
+$http.interceptors.response.use((response) => {
+  console.log('response拦截了', response)
+  // if (response.data) {
+  //   response.data = JSON.parse(response.data)
+  // }
+  return response
+})
 export default $http

@@ -1,5 +1,14 @@
-[*.{js,jsx,ts,tsx,vue}]
-indent_style = space
+# editorconfig.org
+root = true
+
+[*]
+charset = utf-8
 indent_size = 2
-trim_trailing_whitespace = true
+indent_style = space
 insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown 语言中尾随空格是有意义的，比如行尾两个空格相当控行, 2 trailing spaces = linebreak (<br />)，所以我们要特殊指定忽略
+# See https://daringfireball.net/projects/markdown/syntax#p
+[*.md]
+trim_trailing_whitespace = false
