@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import $api from './network/api'
 import axios from 'axios'
 import $http from './network/axios'
+import './assets/common.scss'
 
 Vue.config.productionTip = false
 Vue.prototype.$api = $api

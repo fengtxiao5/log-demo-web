@@ -5,12 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/log/todo/todoList',
+    name: 'todoList',
+    component: () => import('@src/views/todo/todoList'),
+  },
+  {
+    path: '/log/todo/finishStatistic',
+    name: 'statistic',
+    component: () => import('@src/views/todo/finishStatistic.vue'),
   },
 ]
 

@@ -1,58 +1,80 @@
 <template>
-  <div id="app">
-    <div class="left-menu">
-      <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        router="true"
-        @open="handleOpen"
-        @close="handleClose"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
+  <div id="app" class="root-container">
+    <div class="root-container-header"></div>
+    <div class="root-container-body">
+      <div class="left-menu">
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <template v-for="(item, index) in menuItem">
+            <el-menu-item
+              v-if="!item.children.length > 0"
+              :key="index"
+              :index="item.key"
+              @click="changeRoute(item.router)"
+            >
+              <i :class="item.icon"></i>
+              <span slot="title">{{ item.title }}</span>
+            </el-menu-item>
+            <el-submenu v-else :key="index" :index="item.key" popper-class="subItem">
+              <template slot="title">
+                <i class="icon iconfont " :class="item.icon"></i>
+                <span slot="title" style="font-size:14px">
+                  {{ item.title }}
+                </span>
+              </template>
+              <template v-for="(option, io) in item.children">
+                <el-submenu v-if="option.children.length > 0" :key="io" :index="option.key">
+                  <template slot="title">{{ option.title }}</template>
+                  <template v-for="(mem, ine) in option.children">
+                    <el-menu-item :index="mem.key" :key="ine">
+                      {{ mem.title }}
+                    </el-menu-item>
+                  </template>
+                </el-submenu>
+                <el-menu-item-group v-else :key="io">
+                  <el-menu-item :index="option.key" @click="changeRoute(option.router)">
+                    {{ option.title }}
+                  </el-menu-item>
+                </el-menu-item-group>
+              </template>
+            </el-submenu>
           </template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="/about">
-          <i class="el-icon-setting"></i>
-          <span slot="title">测试router</span>
-        </el-menu-item>
-      </el-menu>
-    </div>
-    <div class="right-content">
-      <router-view></router-view>
+        </el-menu>
+      </div>
+      <div class="right-content">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { menu } from '@src/hooks/menu'
+import { cloneDeep } from 'lodash-es'
+import { useRouter } from 'vue-router/composables'
 export default {
   name: 'App-Root',
   components: {},
+  setup() {
+    const menuItem = cloneDeep(menu)
+    const router = useRouter()
+    const changeRoute = (url) => {
+      router.push(url)
+    }
+    return {
+      menuItem,
+      changeRoute,
+    }
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath)
@@ -71,16 +93,25 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.el-menu--inline {
-  .el-menu-item {
-    padding-left: 40px !important;
-  }
-}
-.left-menu {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
+.root-container {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  border-right: 1px solid #dadfe6;
+  .root-container-header {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+  }
+  .root-container-body {
+    width: 200px;
+    height: 100%;
+    .left-menu {
+      height: 100%;
+      .el-menu-vertical-demo {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 </style>
